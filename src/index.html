@@ -41,7 +41,7 @@
 		</ul>
 	</nav>
 
-	<!-- Home -->
+	<!-- The teacher -->
 	<article id="top" class="wrapper style1">
 		<div class="container">
 			<div class="row">
@@ -59,7 +59,7 @@
 		</div>
 	</article>
 
-	<!-- Work -->
+	<!-- Courses -->
 	<article id="courses" class="wrapper style2">
 		<div class="container">
 			<header>
@@ -112,16 +112,16 @@
 					<form method="post" action="#">
 						<div class="row">
 							<div class="col-6 col-12-small">
-								<input type="text" name="name" id="name" placeholder="Nom" />
+								<label>Votre nom et prénom</label>
+								<input type="text" name="name" id="name" placeholder="Nom" required />
 							</div>
 							<div class="col-6 col-12-small">
-								<input type="text" name="email" id="email" placeholder="E-mail" />
+								<label>Comment vous contactez</label>
+								<input type="text" name="email" id="email" placeholder="E-mail" required />
 							</div>
 							<div class="col-12">
-								<input type="text" name="subject" id="subject" placeholder="Votre besoin" />
-							</div>
-							<div class="col-12">
-								<textarea name="message" id="message" placeholder="Détaillez tout ici..."></textarea>
+								<label>Votre besoin</label>
+								<textarea name="message" id="message" placeholder="Détaillez tout ici..." required></textarea>
 							</div>
 							<div class="col-12">
 								<ul class="actions">
