@@ -1,4 +1,7 @@
 {
+    "author": "Aurélie Litzler",
+    "start_url": "./",
+    "default_locale": "fr",
     "name": "Cours aux particuliers",
     "short_name": "Cap",
     "icons": [{

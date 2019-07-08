@@ -150,7 +150,15 @@
 	<script src="assets/js/breakpoints.min.js"></script>
 	<script src="assets/js/util.js"></script>
 	<script src="assets/js/main.js"></script>
-	<script charset="utf-8" src="sw.js" type="application/javascript"></script>
+	<script charset="utf-8" type="application/javascript">
+		// Check that service workers are supported
+		if ('serviceWorker' in navigator) {
+			// Use the window load event to keep the page load performant
+			window.addEventListener('load', () => {
+				navigator.serviceWorker.register('./sw.js');
+			});
+		}
+	</script>
 
 	<noscript>
 		<div class="c-no-script">
