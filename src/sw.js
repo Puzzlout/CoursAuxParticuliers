@@ -22,8 +22,8 @@ workbox.setConfig({ debug: isDebuggingActive });
 // Custom Cache Names
 // https://developers.google.com/web/tools/workbox/guides/configure-workbox
 workbox.core.setCacheNameDetails({
-  prefix: "rr",
-  suffix: "v4"
+  prefix: "cap",
+  suffix: "v1"
 });
 /**
  * See: https://developers.google.com/web/tools/workbox/modules/workbox-sw#skip_waiting_and_clients_claim
@@ -62,7 +62,7 @@ self.addEventListener("activate", function(event) {
 // specified resources, serving them from the cache by default.
 // In addition to precaching, the precacheAndRoute method sets up an implicit
 // cache-first handler.
-workbox.precaching.precacheAndRoute(["./", "./restaurant.html"]);
+workbox.precaching.precacheAndRoute(["./"]);
 
 /**
  * Precache the static assets matching the regex
@@ -110,23 +110,11 @@ workbox.routing.registerRoute(
 /**
  * Cache the Google Static API images (to show them while offline)
  */
-workbox.routing.registerRoute(
-  /.*googleapis.com\/maps\/api\/staticmap.*$/,
-  workbox.strategies.staleWhileRevalidate({ cacheName: "staticmaps-cache" })
-);
+// workbox.routing.registerRoute(
+//   /.*googleapis.com\/maps\/api\/staticmap.*$/,
+//   workbox.strategies.staleWhileRevalidate({ cacheName: "staticmaps-cache" })
+// );
 
-// Make sure to register the restaurant detail URL with the GET parmeters using the "cacheFirst" strategy.
-// http://localhost:8887/restaurant.html?id=1
-workbox.routing.registerRoute(
-  new RegExp("restaurant.html(.*)"),
-  workbox.strategies.cacheFirst({
-    cacheName: "pages",
-    // Status 0 is the response you would get if you request a cross-origin
-    // resource and the server that you're requesting it from is not
-    // configured to serve cross-origin resources.
-    cacheableResponse: { statuses: [0, 200] }
-  })
-);
 workbox.routing.registerRoute(
   new RegExp("index.html"),
   workbox.strategies.cacheFirst({
@@ -138,65 +126,12 @@ workbox.routing.registerRoute(
   })
 );
 
-importScripts("./js/bgSync.min.js");
-self.addEventListener("sync", event => {
-  console.log("Sync is working... Just do stuff now!");
-  if (event.tag.startsWith("review")) {
-    console.log("Sync is working... Process event!");
-    event.waitUntil(ProcessUnsavedReview(event.tag));
-  } else {
-  }
-});
-
-function ProcessUnsavedReview(reviewKey) {
-  getOfflineReview(reviewKey)
-    .then(offlineReview => {
-      if (offlineReview == null || offlineReview == undefined) {
-        throw new Error("No review found!");
-      }
-      return ResendReview(offlineReview);
-    })
-    .then(syncResult => {
-      if (!syncResult.status) {
-        console.error(new Error("API still not available..."));
-        broadcast({ action: "api-unavailable" }, syncResult.review);
-        return;
-      }
-
-      console.log("Sync is ok... Proceed!");
-      removeOfflineReview(reviewKey)
-        .then(result => {
-          if (result) {
-            broadcast({ action: "review-saved" }, syncResult.review);
-          } else {
-            broadcast({ action: "review-not-deleted" }, syncResult.review);
-          }
-        })
-        .catch(err => {
-          console.error("Impossible to remove cached offline review => ", err);
-        });
-    })
-    .catch(err => {
-      console.error("Failed to process sync event => ", err);
-    });
-}
-
-function ResendReview(review) {
-  console.log("Let's resend the review the API...");
-  return saveNewReview(review)
-    .then(apiResult => {
-      return { status: apiResult.status, review: review };
-    })
-    .catch(err => {
-      console.error("Failed to resend to the review from sw => ", err);
-      return { status: false, review: undefined };
-    });
-}
-
-function broadcast(message) {
-  clients.matchAll().then(clients => {
-    for (const client of clients) {
-      client.postMessage(message);
-    }
-  });
-}
+// importScripts("./js/bgSync.min.js");
+// self.addEventListener("sync", event => {
+//   console.log("Sync is working... Just do stuff now!");
+//   if (event.tag.startsWith("review")) {
+//     console.log("Sync is working... Process event!");
+//     event.waitUntil(ProcessUnsavedReview(event.tag));
+//   } else {
+//   }
+// });
