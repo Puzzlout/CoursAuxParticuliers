@@ -11,6 +11,8 @@
 </head>
 
 <body>
+    <h1>This page reads a Google sheet.</h1>
+    <p>The sheet is: <a href="https://docs.google.com/spreadsheets/d/1OMSN3nSNU4ba7thwK76LIXHX5KLbh5T7I8xJySYPMB0"></a></p>
     <div id="app"></div>
     <script src='https://cdnjs.cloudflare.com/ajax/libs/tabletop.js/1.5.1/tabletop.min.js'></script>
     <script type='text/javascript'>
@@ -28,6 +30,10 @@
             var enableConsoleLog = false;
             var appContainer = document.querySelector("#app");
             tabletop.modelNames.forEach(sheetName => {
+                var h2Element = document.createElement("h2");
+                h2Element.title = sheetName;
+                h2Element.innerText = sheetName;
+                appContainer.append(h2Element);
                 var sheet = tabletop.models[sheetName];
                 if (enableConsoleLog) console.log(sheet.elements);
                 var ulElement = document.createElement("ul");
