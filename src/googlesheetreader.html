@@ -23,10 +23,11 @@
         }
 
         function showInfo(data, tabletop) {
+            var enableConsoleLog = true;
             var appContainer = document.querySelector("#app");
             tabletop.modelNames.forEach(sheetName => {
                 var sheet = tabletop.models[sheetName];
-                console.log(sheet.elements);
+                if (enableConsoleLog) console.log(sheet.elements);
                 var ulElement = document.createElement("ul");
                 ulElement.title = sheetName;
                 sheet.elements.forEach(row => {
