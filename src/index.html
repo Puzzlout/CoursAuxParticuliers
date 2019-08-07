@@ -12,18 +12,18 @@
 	<meta content="yes" name="apple-mobile-web-app-capable" />
 	<meta content="yes" name="mobile-web-app-capable" />
 	<meta content="black" name="apple-mobile-web-app-status-bar-style" />
-	<title>{{ pageTitle }}</title>
+	<title>{% pageTitle %}</title>
 	<meta content="yes" name="apple-touch-fullscreen" />
-	<meta content="{{ author }}" name="author" />
-	<meta content="{{ pageDescription }}" name="description" />
-	<meta content="{{ copyright }}" name="copyright" />
+	<meta content="{% author %}" name="author" />
+	<meta content="{% pageDescription %}" name="description" />
+	<meta content="{% copyright %}" name="copyright" />
 	<meta content="noindex,nofollow" name="robots" />
 	<link rel="apple-touch-icon" sizes="180x180" href="./img/icons/apple-touch-icon.png" />
 	<link rel="icon" type="image/png" sizes="32x32" href="./images/icons/favicon-32x32.png" />
 	<link rel="icon" type="image/png" sizes="16x16" href="./images/icons/favicon-16x16.png" />
 	<link rel="manifest" href="site.webmanifest" />
-	<meta name="apple-mobile-web-app-title" content="{{ pageTitle }}" />
-	<meta name="application-name" content="{{ pageTitle }}" />
+	<meta name="apple-mobile-web-app-title" content="{% pageTitle %}" />
+	<meta name="application-name" content="{% pageTitle %}" />
 	<meta name="msapplication-TileColor" content="#282828" />
 	<meta name="theme-color" content="#282828" />
 	<link rel="stylesheet" href="assets/css/main.css" />
@@ -31,118 +31,121 @@
 
 <body class="is-preload">
 
-	<!-- Nav -->
-	<nav id="nav">
-		<ul class="container">
-			<li><a href="#top">Professeur</a></li>
-			<li><a href="#courses">Cours</a></li>
-			<li><a href="#reviews">Avis</a></li>
-			<li><a href="#contact">Contact</a></li>
-		</ul>
-	</nav>
+	<div id="app">
+		<section v-if="loading" class="loading-screen">
+			<p>Bienvenue, nous chargeons le contenu du site...</p>
+		</section>
+		<section v-if="!loading" class="content">
+			<!-- Nav -->
+			<nav id="nav">
+				<ul class="container">
+					<li v-for="menu in sections.Menus" :key="menu.key"><a href="#">{{ menu.value }}</a></li>
+				</ul>
+			</nav>
 
-	<!-- The teacher -->
-	<article id="top" class="wrapper style1">
-		<div class="container">
-			<div class="row">
-				<div class="col-4 col-5-large col-12-medium">
-					<span class="image fit"><img src="images/pic00.jpg" alt="" /></span>
+			<!-- The teacher -->
+			<article id="top" class="wrapper style1">
+				<div class="container">
+					<div class="row">
+						<div class="col-4 col-5-large col-12-medium">
+							<span class="image fit"><img src="images/pic00.jpg" alt="" /></span>
+						</div>
+						<div class="col-8 col-7-large col-12-medium">
+							<header>
+								<h1>{% sectionTop.introText %} <strong>{% sectionTop.firstName %}</strong>.</h1>
+							</header>
+							<p>{% sectionTop.description %}</p>
+							<a href="#work" class="button large scrolly">{% sectionTop.buttonText%}</a>
+						</div>
+					</div>
 				</div>
-				<div class="col-8 col-7-large col-12-medium">
+			</article>
+
+			<!-- Courses -->
+			<article id="courses" class="wrapper style2">
+				<div class="container">
 					<header>
-						<h1>{{ sectionTop.introText }} <strong>{{ sectionTop.firstName }}</strong>.</h1>
+						<h2>{% sectionCourses.title %}</h2>
 					</header>
-					<p>{{ sectionTop.description }}</p>
-					<a href="#work" class="button large scrolly">{{ sectionTop.buttonText}}</a>
-				</div>
-			</div>
-		</div>
-	</article>
-
-	<!-- Courses -->
-	<article id="courses" class="wrapper style2">
-		<div class="container">
-			<header>
-				<h2>{{ sectionCourses.title }}</h2>
-			</header>
-			<div class="row aln-center">
-				<div class="col-4 col-6-medium col-12-small">
-					<section class="box style1">
-						<span class="icon featured fa-comments"></span>
-						<h3>{{ sectionCourses.courses[0].title }}</h3>
-						<p>{{ sectionCourses.courses[0].description }}</p>
-					</section>
-				</div>
-				<div class="col-4 col-6-medium col-12-small">
-					<section class="box style1">
-						<span class="icon solid featured fa-camera-retro"></span>
-						<h3>{{ sectionCourses.courses[1].title }}</h3>
-						<p>{{ sectionCourses.courses[1].description }}</p>
-					</section>
-				</div>
-				<div class="col-4 col-6-medium col-12-small">
-					<section class="box style1">
-						<span class="icon featured fa-thumbs-up"></span>
-						<h3>{{ sectionCourses.courses[2].title }}</h3>
-						<p>{{ sectionCourses.courses[2].description }}</p>
-					</section>
-				</div>
-			</div>
-			<!--<footer>
+					<div class="row aln-center">
+						<div class="col-4 col-6-medium col-12-small">
+							<section class="box style1">
+								<span class="icon featured fa-comments"></span>
+								<h3>{% sectionCourses.courses[0].title %}</h3>
+								<p>{% sectionCourses.courses[0].description %}</p>
+							</section>
+						</div>
+						<div class="col-4 col-6-medium col-12-small">
+							<section class="box style1">
+								<span class="icon solid featured fa-camera-retro"></span>
+								<h3>{% sectionCourses.courses[1].title %}</h3>
+								<p>{% sectionCourses.courses[1].description %}</p>
+							</section>
+						</div>
+						<div class="col-4 col-6-medium col-12-small">
+							<section class="box style1">
+								<span class="icon featured fa-thumbs-up"></span>
+								<h3>{% sectionCourses.courses[2].title %}</h3>
+								<p>{% sectionCourses.courses[2].description %}</p>
+							</section>
+						</div>
+					</div>
+					<!--<footer>
 				<p>J'ai de l'expérience. Vous souhaitez connaître l'avis de mes élèves?</p>
 				<a href="#portfolio" class="button large scrolly">Les lire</a>
 			</footer>-->
-		</div>
-	</article>
-
-	<!-- Reviews -->
-	<article id="reviews" class="wrapper style3">
-
-	</article>
-
-	<!-- Contact -->
-	<article id="contact" class="wrapper style4">
-		<div class="container medium">
-			<header>
-				<h2>{{ sectionContact.title }}</h2>
-				<p>{{ sectionContact.description }}</p>
-			</header>
-			<div class="row">
-				<div class="col-12">
-					<form method="post" action="#">
-						<div class="row">
-							<div class="col-6 col-12-small">
-								<label for="name">Votre nom et prénom</label>
-								<input type="text" name="name" id="name" placeholder="Nom" required />
-							</div>
-							<div class="col-6 col-12-small">
-								<label for="email">Comment vous contactez</label>
-								<input type="text" name="email" id="email" placeholder="E-mail" required />
-							</div>
-							<div class="col-12">
-								<label for="message">Votre besoin</label>
-								<textarea name="message" id="message" placeholder="Détaillez tout ici..." required></textarea>
-							</div>
-							<div class="col-12">
-								<ul class="actions">
-									<li><input type="submit" value="Envoyer le message" /></li>
-									<li><input type="reset" value="Je recommence" class="alt" /></li>
-								</ul>
-							</div>
-						</div>
-					</form>
 				</div>
-			</div>
-			<footer>
-				<ul id="copyright">
-					<li>&copy; Untitled. All rights reserved.</li>
-					<li>Design: <a href="http://html5up.net">HTML5 UP</a></li>
-					<li>Réalisation: <a href="http://puzzlout.com">Puzzlout</a></li>
-				</ul>
-			</footer>
-		</div>
-	</article>
+			</article>
 
+			<!-- Reviews -->
+			<article id="reviews" class="wrapper style3">
+
+			</article>
+
+			<!-- Contact -->
+			<article id="contact" class="wrapper style4">
+				<div class="container medium">
+					<header>
+						<h2>{% sectionContact.title %}</h2>
+						<p>{% sectionContact.description %}</p>
+					</header>
+					<div class="row">
+						<div class="col-12">
+							<form method="post" action="#">
+								<div class="row">
+									<div class="col-6 col-12-small">
+										<label for="name">Votre nom et prénom</label>
+										<input type="text" name="name" id="name" placeholder="Nom" required />
+									</div>
+									<div class="col-6 col-12-small">
+										<label for="email">Comment vous contactez</label>
+										<input type="text" name="email" id="email" placeholder="E-mail" required />
+									</div>
+									<div class="col-12">
+										<label for="message">Votre besoin</label>
+										<textarea name="message" id="message" placeholder="Détaillez tout ici..." required></textarea>
+									</div>
+									<div class="col-12">
+										<ul class="actions">
+											<li><input type="submit" value="Envoyer le message" /></li>
+											<li><input type="reset" value="Je recommence" class="alt" /></li>
+										</ul>
+									</div>
+								</div>
+							</form>
+						</div>
+					</div>
+					<footer>
+						<ul id="copyright">
+							<li>&copy; Untitled. All rights reserved.</li>
+							<li>Design: <a href="http://html5up.net">HTML5 UP</a></li>
+							<li>Réalisation: <a href="http://puzzlout.com">Puzzlout</a></li>
+						</ul>
+					</footer>
+				</div>
+			</article>
+		</section>
+	</div>
 	<!-- Scripts -->
 	<script src="assets/js/jquery.min.js"></script>
 	<script src="assets/js/jquery.scrolly.min.js"></script>
@@ -150,6 +153,14 @@
 	<script src="assets/js/breakpoints.min.js"></script>
 	<script src="assets/js/util.js"></script>
 	<script src="assets/js/main.js"></script>
+	<script>
+		if (!(window.Promise && [].includes && Object.assign && window.Map)) {
+			document.write('<script src="https://cdn.polyfill.io/v2/polyfill.min.js"></scr' + 'ipt>')
+		}
+	</script>
+	<script src='https://cdnjs.cloudflare.com/ajax/libs/tabletop.js/1.5.1/tabletop.min.js'></script>
+	<script src="https://cdn.jsdelivr.net/npm/vue@2.5.13/dist/vue.js"></script>
+	<script src="assets/js/vue.app.js"></script>
 	<script charset="utf-8" type="application/javascript">
 		// Check that service workers are supported
 		if ('serviceWorker' in navigator) {

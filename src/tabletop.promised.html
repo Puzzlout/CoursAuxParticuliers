@@ -1,0 +1,128 @@
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+    </style>
+</head>
+
+<body>
+    <div id="app">
+        <h1>Data from sheet</h1>
+        <p v-if="loading">Loading...</p>
+        <section v-if='!loading'>
+            <h2>Menus</h2>
+            <ul>
+                <li v-for="menu in sections.Menus" :key="menu.key">{{ menu.value }}</li>
+            </ul>
+            <h2>Courses</h2>
+            <ul>
+                <li v-for="label in sections.Section_courses" :key="label.key">{{ label.value }}</li>
+            </ul>
+            <h2>Reviews</h2>
+            <ul>
+                <li v-for="label in sections.Section_reviews" :key="label.key">{{ label.value }}</li>
+            </ul>
+            <h2>Contact</h2>
+            <ul>
+                <li v-for="label in sections.Section_contact" :key="label.key">{{ label.value }}</li>
+            </ul>
+            <h2>Top</h2>
+            <ul>
+                <li v-for="label in sections.Section_top" :key="label.key">{{ label.value }}</li>
+            </ul>
+        </section>
+    </div>
+
+    <script>
+        if (!(window.Promise && [].includes && Object.assign && window.Map)) {
+            document.write('<script src="https://cdn.polyfill.io/v2/polyfill.min.js"></scr' + 'ipt>')
+        }
+    </script>
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/tabletop.js/1.5.1/tabletop.min.js'></script>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.5.13/dist/vue.js"></script>
+    <script>
+        function getSpreadsheetData(sheetURL) {
+
+        }
+        var app = new Vue({
+            el: "#app",
+            data: {
+                sheetUrl: "https://docs.google.com/spreadsheets/d/1OMSN3nSNU4ba7thwK76LIXHX5KLbh5T7I8xJySYPMB0/pubhtml",
+                sections: {},
+                loading: true,
+                enableLog: true
+            },
+            methods: {
+                getSpreadsheetData: function () {
+                    self = this;
+                    return new Promise(function (resolve, reject) {
+
+                        var options = {
+                            key: self.sheetUrl,
+                            callback: onLoad,
+                            simpleSheet: true
+                        };
+
+                        function onLoad(data, tabletop) {
+
+                            // 'data' is the array for a simple spreadsheet
+                            // 'tabletop' is the whole object with sheets and more.
+                            // could resolve(tabletop) too.
+
+                            // probably should do an error check here and then:
+                            // if (err) {reject(err); }
+
+                            resolve(tabletop);
+                            return;
+
+                        }
+
+                        Tabletop.init(options);
+
+                    });
+                },
+                processSheetData: function (tabletop) {
+                    console.log(tabletop);
+                    tabletop.modelNames.forEach(sheetName => {
+                        var sheet = tabletop.models[sheetName];
+                        if (this.enableLog) console.log(`Sheet ${sheetName}`, sheet.elements);
+                        var labels = [];
+                        sheet.elements.forEach(row => {
+                            labels.push({
+                                key: row.Key,
+                                value: row.Value
+                            });
+                        });
+                        Object.defineProperty(this.sections, sheetName, {
+                            value: labels
+                        });
+                    });
+                    if (this.enableLog) console.log("Sections", this.sections);
+                    this.loading = false;
+                },
+                loadSheetData: function () {
+                    var runPromise = this.getSpreadsheetData();
+                    self = this;
+                    runPromise.then(function (tabletop) {
+                            self.processSheetData(tabletop);
+                        })
+                        .catch((promise_err) => {
+                            console.log(promise_err);
+                        });
+                }
+            },
+            mounted: function () {
+
+            },
+            created: function () {
+                this.loadSheetData();
+            }
+        });
+    </script>
+</body>
+
+</html>
