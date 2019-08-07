@@ -5,7 +5,7 @@ var app = new Vue({
       "https://docs.google.com/spreadsheets/d/1OMSN3nSNU4ba7thwK76LIXHX5KLbh5T7I8xJySYPMB0/pubhtml",
     sections: {},
     loading: true,
-    enableLog: true
+    enableLog: false
   },
   methods: {
     getSpreadsheetData: function() {
