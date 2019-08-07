@@ -33,7 +33,7 @@ var app = new Vue({
       });
     },
     processSheetData: function(tabletop) {
-      console.log(tabletop);
+      if (this.enableLog) console.log(tabletop);
       tabletop.modelNames.forEach(sheetName => {
         var sheet = tabletop.models[sheetName];
         if (this.enableLog) console.log(`Sheet ${sheetName}`, sheet.elements);
