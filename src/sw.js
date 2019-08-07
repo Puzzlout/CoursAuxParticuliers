@@ -23,7 +23,7 @@ workbox.setConfig({ debug: isDebuggingActive });
 // https://developers.google.com/web/tools/workbox/guides/configure-workbox
 workbox.core.setCacheNameDetails({
   prefix: "cap",
-  suffix: "v1.1"
+  suffix: "v2.0"
 });
 /**
  * See: https://developers.google.com/web/tools/workbox/modules/workbox-sw#skip_waiting_and_clients_claim
