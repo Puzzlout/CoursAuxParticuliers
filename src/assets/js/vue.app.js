@@ -34,11 +34,11 @@ var app = new Vue({
     },
     processSheetData: function(tabletop) {
       if (this.enableLog) console.log(tabletop);
-      tabletop.modelNames.forEach(sheetName => {
+      tabletop.modelNames.forEach(function(sheetName) {
         var sheet = tabletop.models[sheetName];
         if (this.enableLog) console.log(`Sheet ${sheetName}`, sheet.elements);
         var labels = [];
-        sheet.elements.forEach(row => {
+        sheet.elements.forEach(function(row) {
           labels.push({
             key: row.Key,
             value: row.Value
