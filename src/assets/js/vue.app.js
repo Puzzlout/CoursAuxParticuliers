@@ -36,7 +36,7 @@ var app = new Vue({
       if (this.enableLog) console.log(tabletop);
       tabletop.modelNames.forEach(function(sheetName) {
         var sheet = tabletop.models[sheetName];
-        if (this.enableLog) console.log(`Sheet ${sheetName}`, sheet.elements);
+        if (this.enableLog) console.log('Sheet ' + sheetName, sheet.elements);
         var labels = [];
         sheet.elements.forEach(function(row) {
           labels.push({
