@@ -58,7 +58,7 @@ var app = new Vue({
         .then(function(tabletop) {
           self.processSheetData(tabletop);
         })
-        .catch(promise_err => {
+        .catch(function(promise_err) {
           console.log(promise_err);
         });
     }
