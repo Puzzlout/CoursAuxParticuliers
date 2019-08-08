@@ -12,11 +12,10 @@
 	<meta content="yes" name="apple-mobile-web-app-capable" />
 	<meta content="yes" name="mobile-web-app-capable" />
 	<meta content="black" name="apple-mobile-web-app-status-bar-style" />
-	<title>{% pageTitle %}</title>
+	<title>Cours particuliers de musique, mathématiques, anglais</title>
 	<meta content="yes" name="apple-touch-fullscreen" />
-	<meta content="{% author %}" name="author" />
-	<meta content="{% pageDescription %}" name="description" />
-	<meta content="{% copyright %}" name="copyright" />
+	<meta content="Musique, mathématiques, anglais, des cours pour tout âge à Tournon-sur-Rhône, Tain-L'Hermitage  et ses environs" name="description" />
+	<meta content="Made by Puzzlout" name="copyright" />
 	<meta content="noindex,nofollow" name="robots" />
 	<link rel="apple-touch-icon" sizes="180x180" href="./img/icons/apple-touch-icon.png" />
 	<link rel="icon" type="image/png" sizes="32x32" href="./images/icons/favicon-32x32.png" />
@@ -52,10 +51,10 @@
 						</div>
 						<div class="col-8 col-7-large col-12-medium">
 							<header>
-								<h1>{% sectionTop.introText %} <strong>{% sectionTop.firstName %}</strong>.</h1>
+								<h1 v-html="sections.Section_top.introText"></h1>
 							</header>
-							<p>{% sectionTop.description %}</p>
-							<a href="#work" class="button large scrolly">{% sectionTop.buttonText%}</a>
+							<p v-html="sections.Section_top.description"></p>
+							<a href="#work" class="button large scrolly">{{ sections.Section_top.buttonText}}</a>
 						</div>
 					</div>
 				</div>
@@ -165,7 +164,7 @@
 		// Check that service workers are supported
 		if ('serviceWorker' in navigator) {
 			// Use the window load event to keep the page load performant
-			window.addEventListener('load', function() {
+			window.addEventListener('load', function () {
 				navigator.serviceWorker.register('./sw.js');
 			});
 		}

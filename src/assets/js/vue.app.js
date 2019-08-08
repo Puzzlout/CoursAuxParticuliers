@@ -1,3 +1,4 @@
+const SHEET_DATATYPE = "Sheet_DataType";
 var app = new Vue({
   el: "#app",
   data: {
@@ -5,7 +6,7 @@ var app = new Vue({
       "https://docs.google.com/spreadsheets/d/1OMSN3nSNU4ba7thwK76LIXHX5KLbh5T7I8xJySYPMB0/pubhtml",
     sections: {},
     loading: true,
-    enableLog: false
+    enableLog: true
   },
   methods: {
     getSpreadsheetData: function() {
@@ -33,23 +34,69 @@ var app = new Vue({
       });
     },
     processSheetData: function(tabletop) {
+      self = this;
       if (this.enableLog) console.log(tabletop);
+      //since forEach doesn't use arrow function, "this" in the forEach is not Vue instance!
+      if (tabletop.models[SHEET_DATATYPE] === undefined) {
+        const invalidGoogleSheetMsg =
+          "Please create a sheet 'Sheet_DataType' to define how should be transformed each sheet data";
+        alert(invalidGoogleSheetMsg);
+        throw new Error(invalidGoogleSheetMsg);
+      }
+      var sheetDataType = this.transformDataToObject(
+        tabletop.models[SHEET_DATATYPE]
+      );
       tabletop.modelNames.forEach(function(sheetName) {
         var sheet = tabletop.models[sheetName];
-        if (this.enableLog) console.log('Sheet ' + sheetName, sheet.elements);
-        var labels = [];
-        sheet.elements.forEach(function(row) {
-          labels.push({
-            key: row.Key,
-            value: row.Value
+        if (self.enableLog) console.log("Sheet " + sheetName, sheet.elements);
+        if (sheetDataType[sheetName] === undefined) {
+          const sheetNotDeclaredInSheetDataType =
+            "Please add " +
+            sheetName +
+            " in sheet 'Sheet_DataType' to define how it should be transformed from the Google Sheet document";
+          alert(sheetNotDeclaredInSheetDataType);
+          throw new Error(sheetNotDeclaredInSheetDataType);
+        }
+
+        var transformedData = self.transformSheetData(
+          sheet,
+          sheetDataType[sheetName]
+        );
+        if (transformedData) {
+          Object.defineProperty(self.sections, sheetName, {
+            value: transformedData
           });
-        });
-        Object.defineProperty(this.sections, sheetName, {
-          value: labels
-        });
+        }
       });
       if (this.enableLog) console.log("Sections", this.sections);
       this.loading = false;
+    },
+    transformSheetData: function(sheet, dataType) {
+      if (dataType === "ignore") return false;
+      if (dataType === "array") return this.transformDataToArray(sheet);
+      if (dataType === "object") return this.transformDataToObject(sheet);
+
+      throw new Error("Type " + dataType + " is not implemented at the moment");
+    },
+    transformDataToArray: function(sheetData) {
+      self = this;
+      var labels = [];
+      sheetData.elements.forEach(function(row) {
+        labels.push({
+          key: row.Key,
+          value: row.Value
+        });
+      });
+      return labels;
+    },
+    transformDataToObject: function(sheetData) {
+      var newObject = {};
+      sheetData.elements.forEach(function(row) {
+        Object.defineProperty(newObject, row.Key, {
+          value: row.Value
+        });
+      });
+      return newObject;
     },
     loadSheetData: function() {
       var runPromise = this.getSpreadsheetData();
