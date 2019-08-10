@@ -64,28 +64,28 @@
 			<article id="courses" class="wrapper style2">
 				<div class="container">
 					<header>
-						<h2>{% sectionCourses.title %}</h2>
+						<h2>{{ sections.Section_courses.section_title}}</h2>
 					</header>
 					<div class="row aln-center">
 						<div class="col-4 col-6-medium col-12-small">
 							<section class="box style1">
 								<span class="icon featured fa-comments"></span>
-								<h3>{% sectionCourses.courses[0].title %}</h3>
-								<p>{% sectionCourses.courses[0].description %}</p>
+								<h3 v-html = "sections.Section_courses.course1_title"></h3>
+								<p>{{ sections.Section_courses.course1_description }}</p>
 							</section>
 						</div>
 						<div class="col-4 col-6-medium col-12-small">
 							<section class="box style1">
 								<span class="icon solid featured fa-camera-retro"></span>
-								<h3>{% sectionCourses.courses[1].title %}</h3>
-								<p>{% sectionCourses.courses[1].description %}</p>
+								<h3 v-html = "sections.Section_courses.course2_title"></h3>
+								<p>{{ sections.Section_courses.course2_description }}</p>
 							</section>
 						</div>
 						<div class="col-4 col-6-medium col-12-small">
 							<section class="box style1">
 								<span class="icon featured fa-thumbs-up"></span>
-								<h3>{% sectionCourses.courses[2].title %}</h3>
-								<p>{% sectionCourses.courses[2].description %}</p>
+								<h3 v-html = "sections.Section_courses.course3_title"></h3>
+								<p>{{ sections.Section_courses.course3_description }}</p>
 							</section>
 						</div>
 					</div>
@@ -105,8 +105,8 @@
 			<article id="contact" class="wrapper style4">
 				<div class="container medium">
 					<header>
-						<h2>{% sectionContact.title %}</h2>
-						<p>{% sectionContact.description %}</p>
+						<h2>{{ sections.Section_contact.section_title }}</h2>
+						<p>{{ sections.Section_contact.section_description }}</p>
 					</header>
 					<div class="row">
 						<div class="col-12">
