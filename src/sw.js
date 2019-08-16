@@ -23,7 +23,7 @@ workbox.setConfig({ debug: isDebuggingActive });
 // https://developers.google.com/web/tools/workbox/guides/configure-workbox
 workbox.core.setCacheNameDetails({
   prefix: "cap",
-  suffix: "v2.0"
+  suffix: "v2.1"
 });
 /**
  * See: https://developers.google.com/web/tools/workbox/modules/workbox-sw#skip_waiting_and_clients_claim
@@ -87,10 +87,7 @@ workbox.routing.registerRoute(
  * Images are cached and used until it’s a week old, after which it’ll need updating
  */
 const WEEK_IN_SECONDS = 7 * 24 * 60 * 60;
-const MAX_ENTRIES =
-  5 * 10 + //restaurant images
-  4 + //placeholder svg
-  10; //icons
+const MAX_ENTRIES = 10;
 
 workbox.routing.registerRoute(
   /.*\.(?:png|jpe?g|svg|gif|webp|svg)/,

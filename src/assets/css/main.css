@@ -221,7 +221,6 @@ input, select, textarea {
 		}
 
 /* Container */
-
 	.container {
 		margin: 0 auto;
 		max-width: calc(100% - 50px);

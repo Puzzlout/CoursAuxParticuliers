@@ -84,7 +84,9 @@ var app = new Vue({
       sheetData.elements.forEach(function(row) {
         labels.push({
           key: row.Key,
-          value: row.Value
+          value: row.Value,
+          href: row.Href,
+          order: row.Order
         });
       });
       return labels;

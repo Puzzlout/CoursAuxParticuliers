@@ -25,6 +25,15 @@
 	<meta name="application-name" content="{% pageTitle %}" />
 	<meta name="msapplication-TileColor" content="#282828" />
 	<meta name="theme-color" content="#282828" />
+	<style>
+		.content {
+			display: none;
+		}
+
+		.content-loaded {
+			display: block;
+		}
+	</style>
 	<link rel="stylesheet" href="assets/css/main.css" />
 </head>
 
@@ -34,11 +43,12 @@
 		<section v-if="loading" class="loading-screen">
 			<p>Bienvenue, nous chargeons le contenu du site...</p>
 		</section>
-		<section v-if="!loading" class="content">
+		<!-- <section v-if="!loading" class="content"> -->
+		<section class="content" :class="{ 'content-loaded' : !loading }">
 			<!-- Nav -->
 			<nav id="nav">
 				<ul class="container">
-					<li v-for="menu in sections.Menus" :key="menu.key"><a href="#">{{ menu.value }}</a></li>
+					<li v-for="menu in sections.Menus" :key="menu.key"><a :href="menu.href">{{ menu.value }}</a></li>
 				</ul>
 			</nav>
 
@@ -47,7 +57,7 @@
 				<div class="container">
 					<div class="row">
 						<div class="col-4 col-5-large col-12-medium">
-							<span class="image fit"><img src="images/pic00.jpg" alt="" /></span>
+							<span class="image fit"><img src="images/teacher.jpg" alt="" /></span>
 						</div>
 						<div class="col-8 col-7-large col-12-medium">
 							<header>
@@ -70,21 +80,21 @@
 						<div class="col-4 col-6-medium col-12-small">
 							<section class="box style1">
 								<span class="icon featured fa-comments"></span>
-								<h3 v-html = "sections.Section_courses.course1_title"></h3>
+								<h3 v-html="sections.Section_courses.course1_title"></h3>
 								<p>{{ sections.Section_courses.course1_description }}</p>
 							</section>
 						</div>
 						<div class="col-4 col-6-medium col-12-small">
 							<section class="box style1">
 								<span class="icon solid featured fa-camera-retro"></span>
-								<h3 v-html = "sections.Section_courses.course2_title"></h3>
+								<h3 v-html="sections.Section_courses.course2_title"></h3>
 								<p>{{ sections.Section_courses.course2_description }}</p>
 							</section>
 						</div>
 						<div class="col-4 col-6-medium col-12-small">
 							<section class="box style1">
 								<span class="icon featured fa-thumbs-up"></span>
-								<h3 v-html = "sections.Section_courses.course3_title"></h3>
+								<h3 v-html="sections.Section_courses.course3_title"></h3>
 								<p>{{ sections.Section_courses.course3_description }}</p>
 							</section>
 						</div>
@@ -97,9 +107,7 @@
 			</article>
 
 			<!-- Reviews -->
-			<article id="reviews" class="wrapper style3">
-
-			</article>
+			<!-- <article id="reviews" class="wrapper style3"> -->
 
 			<!-- Contact -->
 			<article id="contact" class="wrapper style4">
@@ -146,12 +154,8 @@
 		</section>
 	</div>
 	<!-- Scripts -->
-	<script src="assets/js/jquery.min.js"></script>
-	<script src="assets/js/jquery.scrolly.min.js"></script>
 	<script src="assets/js/browser.min.js"></script>
 	<script src="assets/js/breakpoints.min.js"></script>
-	<script src="assets/js/util.js"></script>
-	<script src="assets/js/main.js"></script>
 	<script>
 		if (!(window.Promise && [].includes && Object.assign && window.Map)) {
 			document.write('<script src="https://cdn.polyfill.io/v2/polyfill.min.js"></scr' + 'ipt>')
