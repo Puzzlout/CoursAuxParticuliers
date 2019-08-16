@@ -41,10 +41,10 @@
 
 	<div id="app">
 		<section v-if="loading" class="loading-screen">
-			<p>Bienvenue, nous chargeons le contenu du site...</p>
+			<p>Le site est en cours de chargement...</p>
 		</section>
 		<!-- <section v-if="!loading" class="content"> -->
-		<section class="content" :class="{ 'content-loaded' : !loading }">
+		<section v-if="!loading" class="content" :class="{ 'content-loaded' : !loading }">
 			<!-- Nav -->
 			<nav id="nav">
 				<ul class="container">
@@ -64,7 +64,7 @@
 								<h1 v-html="sections.Section_top.introText"></h1>
 							</header>
 							<p v-html="sections.Section_top.description"></p>
-							<a href="#work" class="button large scrolly">{{ sections.Section_top.buttonText}}</a>
+							<a href="#courses" class="button large scrolly">{{ sections.Section_top.buttonText}}</a>
 						</div>
 					</div>
 				</div>
@@ -99,10 +99,10 @@
 							</section>
 						</div>
 					</div>
-					<!--<footer>
-				<p>J'ai de l'expérience. Vous souhaitez connaître l'avis de mes élèves?</p>
-				<a href="#portfolio" class="button large scrolly">Les lire</a>
-			</footer>-->
+					<footer>
+						<p>{{ sections.Section_courses.pitch }}</p>
+						<a href="#contact" class="button large scrolly" :title="sections.Section_courses.go_to_contact_title">{{ sections.Section_courses.go_to_contact_text }}</a>
+					</footer>
 				</div>
 			</article>
 
@@ -118,19 +118,19 @@
 					</header>
 					<div class="row">
 						<div class="col-12">
-							<form method="post" action="#">
+							<form id="contact-me" method="post" action="#">
 								<div class="row">
 									<div class="col-6 col-12-small">
-										<label for="name">Votre nom et prénom</label>
-										<input type="text" name="name" id="name" placeholder="Nom" required />
+										<label for="name">{{ sections.Section_contact.input_name_label }}</label>
+										<input type="text" name="name" id="name" :placeholder="sections.Section_contact.input_name_placeholder" required :pattern="sections.Section_contact.input_name_pattern" :title="sections.Section_contact.input_name_validation">
 									</div>
 									<div class="col-6 col-12-small">
-										<label for="email">Comment vous contactez</label>
-										<input type="text" name="email" id="email" placeholder="E-mail" required />
+										<label for="email">{{ sections.Section_contact.input_email_label }}</label>
+										<input type="text" name="email" id="email" :placeholder="sections.Section_contact.input_email_placeholder" required :pattern="sections.Section_contact.input_email_pattern" :title="sections.Section_contact.input_email_validation" />
 									</div>
 									<div class="col-12">
-										<label for="message">Votre besoin</label>
-										<textarea name="message" id="message" placeholder="Détaillez tout ici..." required></textarea>
+										<label for="message">{{ sections.Section_contact.input_message_label }}</label>
+										<textarea name="message" id="message" :placeholder="sections.Section_contact.input_message_placeholder" required :pattern="sections.Section_contact.input_message_pattern" :title="sections.Section_contact.input_message_title"></textarea>
 									</div>
 									<div class="col-12">
 										<ul class="actions">
@@ -164,8 +164,8 @@
 	<script src='https://cdnjs.cloudflare.com/ajax/libs/tabletop.js/1.5.1/tabletop.min.js'></script>
 	<script src="https://cdn.jsdelivr.net/npm/vue@2.6.0/dist/vue.js"></script>
 	<script src="assets/js/vue.app.js"></script>
+	<script src="assets/js/validation.js"></script>
 	<script charset="utf-8" type="application/javascript">
-		// Check that service workers are supported
 		if ('serviceWorker' in navigator) {
 			// Use the window load event to keep the page load performant
 			window.addEventListener('load', function () {
@@ -177,9 +177,9 @@
 	<noscript>
 		<div class="c-no-script">
 			<div class="c-no-script-message">
-				Today,
-				<strong>JavaScript</strong> is
-				<a href="https://www.google.fr/search?q=javascript+is+awesome" title="Search Google to find out why!" target="_blank">awesome</a>. Enable it, please, and enjoy what we bring you with it :)
+				Aujourd'hui,
+				<strong>JavaScript</strong> est
+				<a href="https://www.google.fr/search?q=javascript+is+awesome" title="Rechercher sur Google en savoir plus!" target="_blank">incroyable</a>. Activez-le, et vous ferez plaisir :)
 			</div>
 		</div>
 	</noscript>
