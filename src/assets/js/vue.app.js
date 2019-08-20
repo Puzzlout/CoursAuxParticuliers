@@ -86,7 +86,8 @@ var app = new Vue({
           key: row.Key,
           value: row.Value,
           href: row.Href,
-          order: row.Order
+          order: row.Order,
+          isActive: row.IsActive.toLowerCase() === "true" ? true : false
         });
       });
       return labels;
