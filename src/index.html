@@ -49,8 +49,7 @@
 	<link rel="stylesheet" href="assets/css/main.css" />
 </head>
 
-<body class="is-preload">
-
+<body>
 	<div id="app">
 		<div v-if="loading" class="loading-screen">
 			<p>Le site est en cours de chargement...</p>
@@ -61,7 +60,7 @@
 			<nav id="nav">
 				<ul class="container">
 					<li v-for="menu in sections.Menus" :key="menu.key" class="nav-item" :class="{ 'nav-item__inactive' : !menu.isActive }">
-						<a :href="menu.href">{{ menu.value }}</a>
+						<a :href="menu.href" :title="menu.value">{{ menu.value }}</a>
 					</li>
 				</ul>
 			</nav>
@@ -71,14 +70,14 @@
 				<div class="container">
 					<div class="row">
 						<div class="col-4 col-5-large col-12-medium">
-							<span class="image fit"><img src="images/teacher.jpg" alt="" /></span>
+							<span class="image fit"><img src="images/teacher.jpg" :alt="sections.Section_top.imageAlternativeText" /></span>
 						</div>
 						<div class="col-8 col-7-large col-12-medium">
 							<header>
 								<h1 v-html="sections.Section_top.introText"></h1>
 							</header>
 							<p v-html="sections.Section_top.description"></p>
-							<a href="#courses" class="button large scrolly">{{ sections.Section_top.buttonText}}</a>
+							<a href="#courses" :title="sections.Section_top.buttonText" class="button large scrolly">{{ sections.Section_top.buttonText}}</a>
 						</div>
 					</div>
 				</div>
@@ -170,8 +169,8 @@
 		<footer v-if="!loading" class="content" :class="{ 'content-loaded' : !loading }">
 			<ul id="copyright">
 				<li>&copy; Cours aux particuliers. All rights reserved.</li>
-				<li>Design : <a href="http://html5up.net">HTML5 UP</a></li>
-				<li>Réalisation : <a href="http://puzzlout.com">Puzzlout</a></li>
+				<li>Design : <a href="http://html5up.net" title="Designé par HTML5 UP">HTML5 UP</a></li>
+				<li>Réalisation : <a href="http://puzzlout.com" title="Réalisé par Puzzlout">Puzzlout</a></li>
 			</ul>
 		</footer>
 	</div>
