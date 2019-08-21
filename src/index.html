@@ -136,20 +136,28 @@
 								<div class="row">
 									<div class="col-6 col-12-small">
 										<label for="name">{{ sections.Section_contact.input_name_label }}</label>
-										<input type="text" name="name" id="name" :placeholder="sections.Section_contact.input_name_placeholder" required :pattern="sections.Section_contact.input_name_pattern" :title="sections.Section_contact.input_name_validation">
+										<input type="text" role="textbox" name="name" id="name" required :pattern="sections.Section_contact.input_name_pattern" :title="sections.Section_contact.input_name_validation" aria-describedby="helper-name" />
+										<p id="helper-name" class="input-helper">
+											{{ sections.Section_contact.input_name_placeholder }}
+										</p>
 									</div>
 									<div class="col-6 col-12-small">
 										<label for="email">{{ sections.Section_contact.input_email_label }}</label>
-										<input type="text" name="email" id="email" :placeholder="sections.Section_contact.input_email_placeholder" required :pattern="sections.Section_contact.input_email_pattern" :title="sections.Section_contact.input_email_validation" />
+										<input type="text" role="textbox" name="email" id="email" required :pattern="sections.Section_contact.input_email_pattern" :title="sections.Section_contact.input_email_validation" aria-describedby="helper-email" />
+										<p id="helper-email" class="input-helper">
+											{{ sections.Section_contact.input_email_placeholder }}
+										</p>
 									</div>
 									<div class="col-12">
 										<label for="message">{{ sections.Section_contact.input_message_label }}</label>
-										<textarea name="message" id="message" :placeholder="sections.Section_contact.input_message_placeholder" required :pattern="sections.Section_contact.input_message_pattern" :title="sections.Section_contact.input_message_title"></textarea>
+										<textarea name="message" id="message" required :pattern="sections.Section_contact.input_message_pattern" :title="sections.Section_contact.input_message_title" aria-multiline="true" aria-describedby="helper-message"></textarea>
+										<p id="helper-message" class="input-helper">
+											{{ sections.Section_contact.input_message_placeholder }}
+										</p>
 									</div>
 									<div class="col-12">
 										<ul class="actions">
 											<li><input type="submit" value="Envoyer le message" /></li>
-											<li><input type="reset" value="Je recommence" class="alt" /></li>
 										</ul>
 									</div>
 								</div>
@@ -193,7 +201,7 @@
 			<div class="c-no-script-message">
 				Aujourd'hui,
 				<strong>JavaScript</strong> est
-				<a href="https://www.google.fr/search?q=javascript+is+awesome" title="Rechercher sur Google en savoir plus!" target="_blank">incroyable</a>. Activez-le, et vous ferez plaisir :)
+				<a href="https://www.google.fr/search?q=javascript+is+awesome" title="Rechercher sur Google en savoir plus!" target="_blank">incroyable</a>. Activez-le, et vous vous ferez plaisir :)
 			</div>
 		</div>
 	</noscript>

@@ -1889,6 +1889,11 @@ input, select, textarea {
 					background: #252525;
 				}
 
+.input-helper {
+	text-align:left;
+	font-size: 0.925em;
+	color: #fff;
+}
 /* Nav */
 
 	nav {
