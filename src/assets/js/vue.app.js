@@ -6,7 +6,8 @@ var app = new Vue({
       "https://docs.google.com/spreadsheets/d/1OMSN3nSNU4ba7thwK76LIXHX5KLbh5T7I8xJySYPMB0/pubhtml",
     sections: {},
     loading: true,
-    enableLog: true
+    enableLog: true,
+    useGoogleForms: true
   },
   methods: {
     getSpreadsheetData: function() {
@@ -87,7 +88,8 @@ var app = new Vue({
           value: row.Value,
           href: row.Href,
           order: row.Order,
-          isActive: row.IsActive.toLowerCase() === "true" ? true : false
+          isActive: row.IsActive.toLowerCase() === "true" ? true : false,
+          openNewTab: row.OpenNewTab.toLowerCase() === "true" ? true : false
         });
       });
       return labels;

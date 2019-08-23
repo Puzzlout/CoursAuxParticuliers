@@ -115,7 +115,7 @@
 					</div>
 					<footer>
 						<p>{{ sections.Section_courses.pitch }}</p>
-						<a href="#contact" class="button large scrolly" :title="sections.Section_courses.go_to_contact_title">{{ sections.Section_courses.go_to_contact_text }}</a>
+						<a :href="sections.Section_courses.google_forms_link" class="button large scrolly" :title="sections.Section_courses.go_to_contact_title" target="_blank">{{ sections.Section_courses.go_to_contact_text }}</a>
 					</footer>
 				</div>
 			</article>
@@ -124,7 +124,7 @@
 			<!-- <article id="reviews" class="wrapper style3"> -->
 
 			<!-- Contact -->
-			<article id="contact" class="wrapper style4">
+			<article v-if="!useGoogleForms" id="contact" class="wrapper style4">
 				<div class="container medium">
 					<header>
 						<h2>{{ sections.Section_contact.section_title }}</h2>
