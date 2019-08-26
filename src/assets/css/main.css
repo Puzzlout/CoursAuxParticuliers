@@ -2299,7 +2299,7 @@ input, select, textarea {
 					}
 
 	}
-	@media screen and (max-width: 360px) {
+	@media screen and (max-width: 352px) {
 
 		nav {
 			line-height: initial;
