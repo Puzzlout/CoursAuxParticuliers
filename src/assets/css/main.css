@@ -222,6 +222,11 @@ input, select, textarea {
 		}
 
 /* Container */
+.overlay {
+	background-color: rgba(255, 255, 255, 0.75);
+	padding: 2em;
+	border-radius: 0.25em;
+}
 .container {
 		margin: 0 auto;
 		max-width: calc(100% - 50px);
@@ -1770,7 +1775,6 @@ input, select, textarea {
 			}
 
 /* Box */
-
 	.box {
 		background: #fff;
 		box-shadow: inset 0px 0px 0px 1px rgba(0, 0, 0, 0.15), 0px 2px 3px 0px rgba(0, 0, 0, 0.1);
@@ -1853,7 +1857,8 @@ input, select, textarea {
 	}
 
 		.wrapper.style1 {
-			background-image: none;
+			background-image: url(images/top-section-bg.jpg) ;
+			background-size:  cover;
 			background-color: #fff;
 		}
 
@@ -1905,8 +1910,7 @@ input, select, textarea {
 		width: 100%;
 		z-index: 10000;
 		cursor: default;
-		height: 3.5em;
-		line-height: 3.5em;
+		line-height: 4em;
 	}
 
 		nav ul {
@@ -2090,13 +2094,12 @@ input, select, textarea {
 
 			#top {
 				text-align: center;
-				padding: 5em 0;
+				padding: 4em 0;
 			}
 
 				#top .image {
 					margin: 0 auto 2em auto;
 				}
-
 	}
 
 /* Small */
@@ -2244,16 +2247,11 @@ input, select, textarea {
 		/* Wrappers */
 
 			.wrapper {
-				padding: 3em 0;
+				padding: 6em 0;
 				text-align: center;
 			}
 
 		/* Nav */
-
-			nav {
-				height: 44px;
-				line-height: 44px;
-			}
 
 				nav a {
 					padding: 0 0.75em;
@@ -2264,10 +2262,9 @@ input, select, textarea {
 
 		/* Articles */
 
-			#top {
-				padding: 3em 0;
-			}
-
+		#top {
+			padding: 2em
+		}
 				#top .image {
 					width: 15em;
 					height: 15em;
@@ -2302,3 +2299,18 @@ input, select, textarea {
 					}
 
 	}
+	@media screen and (max-width: 360px) {
+
+		nav {
+			line-height: initial;
+		}
+		#top {
+			padding: 3em 0;
+		}
+
+					#top .image {
+					width: 8em;
+					height: 8em;
+					margin-bottom: 0;
+				}
+			}

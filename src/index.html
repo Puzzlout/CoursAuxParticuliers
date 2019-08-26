@@ -74,11 +74,13 @@
 							<span class="image fit"><img src="images/teacher.jpg" :alt="sections.Section_top.imageAlternativeText" /></span>
 						</div>
 						<div class="col-8 col-7-large col-12-medium">
-							<header>
-								<h1 v-html="sections.Section_top.introText"></h1>
-							</header>
-							<p v-html="sections.Section_top.description"></p>
-							<a href="#courses" :title="sections.Section_top.buttonText" class="button large scrolly">{{ sections.Section_top.buttonText}}</a>
+							<div class="overlay">
+								<header>
+									<h1 v-html="sections.Section_top.introText"></h1>
+								</header>
+								<p v-html="sections.Section_top.description"></p>
+								<a href="#courses" :title="sections.Section_top.buttonText" class="button large scrolly">{{ sections.Section_top.buttonText}}</a>
+							</div>
 						</div>
 					</div>
 				</div>
