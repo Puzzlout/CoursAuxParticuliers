@@ -7,9 +7,16 @@ var app = new Vue({
     sections: {},
     loading: true,
     enableLog: true,
-    useGoogleForms: true
+    useGoogleForms: true,
+    showTos: false
   },
   methods: {
+    showtos: function(event) {
+      this.showTos = true;
+    },
+    hidetos: function(event) {
+      this.showTos = false;
+    },
     getSpreadsheetData: function() {
       self = this;
       return new Promise(function(resolve, reject) {
@@ -88,8 +95,15 @@ var app = new Vue({
           value: row.Value,
           href: row.Href,
           order: row.Order,
-          isActive: row.IsActive.toLowerCase() === "true" ? true : false,
-          openNewTab: row.OpenNewTab.toLowerCase() === "true" ? true : false
+          isActive:
+            row.IsActive !== undefined && row.IsActive.toLowerCase() === "true"
+              ? true
+              : false,
+          openNewTab:
+            row.OpenNewTab !== undefined &&
+            row.OpenNewTab.toLowerCase() === "true"
+              ? true
+              : false
         });
       });
       return labels;

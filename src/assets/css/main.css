@@ -2314,3 +2314,37 @@ input, select, textarea {
 					margin-bottom: 0;
 				}
 			}
+
+.tos {
+	display: none
+}
+.modal {
+	width: 100%;
+	height: 100%;
+	position: absolute;
+	top: 0;
+	left: 0;
+	display: block;
+	z-index: 99999;
+	background-color: #fff;
+}
+
+.modal .tos-title {
+	margin-top: 3em;
+}
+.modal div,
+.modal h2,
+.modal h3,
+.modal p {
+	padding: 1em;
+	background-color: #fff;
+	margin: 0;
+}
+.modal div a {
+	color: blue;
+}
+.close-modal {
+	position: fixed;
+	top: 0;
+	left: 0;
+}

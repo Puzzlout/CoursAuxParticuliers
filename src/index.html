@@ -171,12 +171,17 @@
 					</div>
 				</div>
 			</article>
+			<article class="tos" :class=" { 'modal' : showTos }">
+				<a href="#" class="close-modal button" @click="hidetos">Revenir au site</a>
+				<div v-for="paragraph in sections.Page_mentions_legales" :key="paragraph.key" v-html="paragraph.value"></div>
+			</article>
 		</section>
 		<footer v-if="!loading" class="content" :class="{ 'content-loaded' : !loading }">
 			<ul id="copyright">
 				<li>&copy; Cours aux particuliers. All rights reserved.</li>
 				<li>Design : <a href="http://html5up.net" title="Designé par HTML5 UP">HTML5 UP</a></li>
 				<li>Réalisation : <a href="http://puzzlout.com" title="Réalisé par Puzzlout">Puzzlout</a></li>
+				<li><a href="#tos" title="Lire les mentions légales" @click="showtos">Mentions légales</a></li>
 			</ul>
 		</footer>
 	</div>
