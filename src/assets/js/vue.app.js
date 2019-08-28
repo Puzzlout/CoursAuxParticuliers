@@ -4,7 +4,7 @@ var app = new Vue({
   data: {
     sheetUrl:
       "https://docs.google.com/spreadsheets/d/1OMSN3nSNU4ba7thwK76LIXHX5KLbh5T7I8xJySYPMB0/pubhtml",
-    sections: {},
+    data: {},
     loading: true,
     enableLog: true,
     useGoogleForms: true,
@@ -56,7 +56,7 @@ var app = new Vue({
       );
       tabletop.modelNames.forEach(function(sheetName) {
         var sheet = tabletop.models[sheetName];
-        if (self.enableLog) console.log("Sheet " + sheetName, sheet.elements);
+        //if (self.enableLog) console.log("Sheet " + sheetName, sheet.elements);
         if (sheetDataType[sheetName] === undefined) {
           const sheetNotDeclaredInSheetDataType =
             "Please add " +
@@ -71,20 +71,39 @@ var app = new Vue({
           sheetDataType[sheetName]
         );
         if (transformedData) {
-          Object.defineProperty(self.sections, sheetName, {
+          Object.defineProperty(self.data, sheetName, {
             value: transformedData
           });
         }
       });
-      if (this.enableLog) console.log("Sections", this.sections);
+      if (this.enableLog) console.log("Formatted data", this.data);
       this.loading = false;
     },
     transformSheetData: function(sheet, dataType) {
       if (dataType === "ignore") return false;
       if (dataType === "array") return this.transformDataToArray(sheet);
       if (dataType === "object") return this.transformDataToObject(sheet);
+      if (dataType === "nestedObject")
+        return this.transformDataToNestedObject(sheet);
 
-      throw new Error("Type " + dataType + " is not implemented at the moment");
+      console.warn("Type " + dataType + " is not implemented at the moment. ");
+      console.warn("Sheet '" + sheet.name + "' will be ignored.");
+    },
+    transformDataToNestedObject: function(sheetData) {
+      self = this;
+      var arrObjs = [];
+      sheetData.elements.forEach(function(row) {
+        var sectionName = row.Section;
+        if (!arrObjs[sectionName]) {
+          Object.defineProperty(arrObjs, sectionName, {
+            value: {}
+          });
+        }
+        Object.defineProperty(arrObjs[sectionName], row.Key, {
+          value: row.Value
+        });
+      });
+      return arrObjs;
     },
     transformDataToArray: function(sheetData) {
       self = this;
