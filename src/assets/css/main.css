@@ -203,6 +203,9 @@ input, select, textarea {
 		margin-bottom: 2em;
 	}
 
+	p {
+		font-size: 1.25em;
+	}
 	header {
 		margin: 0 0 3em 0;
 	}
@@ -1599,10 +1602,6 @@ input, select, textarea {
 
 /* Section/Article */
 
-	section, article {
-		margin-bottom: 3em;
-	}
-
 	section > :last-child,
 	article > :last-child,
 	section:last-child,
@@ -1857,7 +1856,7 @@ input, select, textarea {
 	}
 
 		.wrapper.style1 {
-			background-image: url(images/top-section-bg.jpg) ;
+			background-image: url(images/top-section-bg.jpg);
 			background-size:  cover;
 			background-color: #fff;
 		}
@@ -1867,6 +1866,8 @@ input, select, textarea {
 		}
 
 		.wrapper.style3 {
+			background-image: url(images/courses-section-bg.jpg);
+			background-size:  cover;
 			background-color: #f4f4f4;
 		}
 
@@ -2126,6 +2127,10 @@ input, select, textarea {
 			h1 {
 				font-size: 2.25em;
 				line-height: 1.25em;
+			}
+
+			p {
+				font-size: 1em;
 			}
 
 			header {

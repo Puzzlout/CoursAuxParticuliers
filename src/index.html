@@ -79,15 +79,26 @@
 									<h1 v-html="data.Sections.top.introText"></h1>
 								</header>
 								<p v-html="data.Sections.top.description"></p>
-								<a href="#courses" :title="data.Sections.top.buttonText" class="button large scrolly">{{ data.Sections.top.buttonText}}</a>
+								<a href="#about" :title="data.Sections.top.buttonText" class="button large scrolly">{{ data.Sections.top.buttonText}}</a>
 							</div>
 						</div>
 					</div>
 				</div>
 			</article>
+			<article id="about" class="wrapper style2">
+				<div class="container">
+					<header>
+						<h2>{{ data.Sections.about.title}}</h2>
+					</header>
+					<p v-html="data.Sections.about.paragraphe1"></p>
+					<p v-html="data.Sections.about.paragraphe2"></p>
+					<p v-html="data.Sections.about.paragraphe3"></p>
+					<a href="#courses" :title="data.Sections.about.buttonText" class="button large scrolly">{{ data.Sections.about.buttonText}}</a>
 
+				</div>
+			</article>
 			<!-- Courses -->
-			<article id="courses" class="wrapper style2">
+			<article id="courses" class="wrapper style3">
 				<div class="container">
 					<header>
 						<h2>{{ data.Sections.courses.title}}</h2>
@@ -97,7 +108,7 @@
 							<section class="box style1">
 								<span class="fas" :class="[ data.Sections.courses.course_icon_size, data.Sections.courses.course1_fa_icon ]" :style="{color: data.Sections.courses.course1_color}"></span>
 								<h3 :style="{ color: data.Sections.courses.course1_color }">{{data.Sections.courses.course1_title}}</h3>
-								<p>{{ data.Sections.courses.course1_description }}</p>
+								<p v-html="data.Sections.courses.course1_description"></p>
 							</section>
 						</div>
 						<div class="col-4 col-6-medium col-12-small">
@@ -123,7 +134,15 @@
 			</article>
 
 			<!-- Reviews -->
-			<!-- <article id="reviews" class="wrapper style3"> -->
+			<article id="reviews" class="wrapper style4">
+				<div class="container">
+					<header>
+						<h2>{{ data.Sections.reviews.title}}</h2>
+					</header>
+					<a :href="data.Sections.reviews.buttonLink" :title="data.Sections.reviews.buttonText" class="button large" target="_blank">{{ data.Sections.reviews.buttonText}}</a>
+				</div>
+
+			</article>
 
 			<!-- Contact -->
 			<!--<article v-if="!useGoogleForms" id="contact" class="wrapper style4">
@@ -194,7 +213,8 @@
 		}
 	</script>
 	<script src='https://cdnjs.cloudflare.com/ajax/libs/tabletop.js/1.5.1/tabletop.min.js'></script>
-	<script src="https://cdn.jsdelivr.net/npm/vue@2.6.0/dist/vue.js"></script>
+	<!-- <script src="https://cdn.jsdelivr.net/npm/vue@2.6.0/dist/vue.js"></script> -->
+	<script src="https://cdn.jsdelivr.net/npm/vue@2.6.0"></script>
 	<script src="assets/js/vue.app.js"></script>
 	<script charset="utf-8" type="application/javascript">
 		// if ('serviceWorker' in navigator) {
