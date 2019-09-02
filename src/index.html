@@ -115,14 +115,14 @@
 							<section class="box style1">
 								<span class="fas" :class="[ data.Sections.courses.course_icon_size, data.Sections.courses.course2_fa_icon ]" :style="{color: data.Sections.courses.course2_color}"></span>
 								<h3 :style="{ color: data.Sections.courses.course2_color }">{{data.Sections.courses.course2_title}}</h3>
-								<p>{{ data.Sections.courses.course2_description }}</p>
+								<p v-html="data.Sections.courses.course2_description"></p>
 							</section>
 						</div>
 						<div class="col-4 col-6-medium col-12-small">
 							<section class="box style1">
 								<span class="fas" :class="[ data.Sections.courses.course_icon_size, data.Sections.courses.course3_fa_icon ]" :style="{color: data.Sections.courses.course3_color}"></span>
 								<h3 :style="{ color: data.Sections.courses.course3_color }">{{data.Sections.courses.course3_title}}</h3>
-								<p>{{ data.Sections.courses.course3_description }}</p>
+								<p v-html="data.Sections.courses.course3_description"></p>
 							</section>
 						</div>
 					</div>
