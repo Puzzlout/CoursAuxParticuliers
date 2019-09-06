@@ -1871,6 +1871,9 @@ input, select, textarea {
 			background-color: #f4f4f4;
 		}
 
+		.wrapper.style3 h2 {
+			color: #fff;
+		}
 		.wrapper.style4 {
 			background-color: #303030;
 			color: #999;
